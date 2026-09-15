@@ -22,6 +22,22 @@ class Executor:
             self.functions.call(concepts["name"], concepts.get("args",[]))
             return
 
+         # ARITHMETIC (no data structure involved)
+        if action=="calculate":
+            numbers = concepts.get("numbers",[])
+            op = concepts.get("operator","+")
+            if len(numbers) < 2:
+                print("Need at least two numbers to calculate")
+                return
+            result = numbers[0]
+            for n in numbers[1:]:
+                if op=="+": result += n
+                elif op=="-": result -= n
+                elif op=="*": result *= n
+                elif op=="/": result = result/n if n else float("inf")
+            print(result)
+            return
+
         # CREATE DSA
         if action=="create":
             ds_type = concepts["type"]
